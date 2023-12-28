@@ -40,7 +40,7 @@ Route::namespace('App\\Http\\Controllers\\Api\\')->group(function(){
     Route::prefix('products1')->group(function(){
         Route::get('/', 'ProductController@index');
         Route::get('/{id}', 'ProductController@show');
-        Route::post('/', 'ProductController@save');
+        Route::post('/', 'ProductController@save')->middleware('auth.basic');
         Route::put('/', 'ProductController@update');
         Route::delete('/{id}', 'ProductController@delete');
     });
