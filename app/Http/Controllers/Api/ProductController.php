@@ -28,11 +28,16 @@ private $product;
         $products = $this->product; ///variavel recebe instancia de modelo product (molde)...ou seja...a variavel product sera instancia do modelo
 
         if($request->has('conditions')){ ///se o link de request possuir condições
+            
+            ///$expression = $request->get('conditions');
+            ///dd($expression);
+            
             $expression = explode(';', $request->get('conditions')); ///separe as condições em um array
 
             foreach($expression as $e){///para cada condição, coloca ele num "$e"
-                $exp = explode('=', $e);///dentro de cada "$e" separa-se a chave e valor, colocando em um array de suas posições ($exp)
-                $products = $products->where($exp[0], $exp[1]);///SQL com where, posição [0] é chave, [1] é valor
+                $exp = explode(':', $e);///dentro de cada "$e" separa-se a chave e valor, colocando em um array de suas posições ($exp)
+                $products = $products->where($exp[0], $exp[1], $exp[2]);///SQL com where, posição [0] é chave, [1] é valor
+                ///dd($exp);
             }
         }
         
