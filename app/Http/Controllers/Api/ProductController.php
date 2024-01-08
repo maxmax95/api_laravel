@@ -25,7 +25,7 @@ private $product;
 
         ///return response()->json($products);
 
-        $products = $this->product; ///variavel recebe instancia de modelo product
+        $products = $this->product; ///variavel recebe instancia de modelo product (molde)...ou seja...a variavel product sera instancia do modelo
 
         if($request->has('conditions')){ ///se o link de request possuir condições
             $expression = explode(';', $request->get('conditions')); ///separe as condições em um array
@@ -37,11 +37,12 @@ private $product;
         }
         
         if($request->has('fields')){///se o link de request possuir filtros
-            $fields = $request->get('fields');
-            $products = $products->selectRaw($fields);
+            $fields = $request->get('fields');///captura os filtros,
+            $products = $products->selectRaw($fields);///seleciona so o que foi pedido no filtro...
+            ///(raw...nao precisa estar separado por virgula e aspas simples)
         }
         
-        return new ProductCollection($products->paginate(10));  
+        return new ProductCollection($products->paginate(10));///apos passar nos if`s a variavel products é "encaixada" na cololection(forma) e paginada...  
     }
      public function show($id){
 
