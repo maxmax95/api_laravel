@@ -37,7 +37,9 @@ private $product;
             foreach($expression as $e){///para cada condição, coloca ele num "$e"
                 $exp = explode(':', $e);///dentro de cada "$e" separa-se a chave e valor, colocando em um array de suas posições ($exp)
                 $products = $products->where($exp[0], $exp[1], $exp[2]);///SQL com where, posição [0] é chave, [1] é valor
-                ///dd($exp);
+                ///ele percorre a primeira condição...guarda o resultado, depois a segunda, e filtra com o que ja vinha da primeira...
+                ///só o "$products" é refiltrado a cada loop do foreach, por isso é possivel passar varias condições
+                
             }
         }
         
